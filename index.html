@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Roulette</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div id="ui">
+    <div id="status-bar">
+      👤 Du bist: <span id="client-id">...</span> |
+      💰 Geld: <span id="balance">...</span>
+    </div>
+
+    <div id="roulette-container">
+      <div id="roulette-strip">
+        <div id="strip-inner"></div>
+        <div id="strip-pointer"></div>
+      </div>
+    </div>
+
+    <div id="bet-section">
+      <h2>Wette platzieren</h2>
+      <select id="bet-color">
+        <option value="red">🔴 Rot</option>
+        <option value="black">⚫ Schwarz</option>
+      </select>
+      <input type="number" id="bet-amount" placeholder="Einsatz" min="1" value="10">
+      <button id="place-bet">Wette abgeben</button>
+    </div>
+
+    <div id="host-section" style="display:none;">
+      <h2>🎯 Du bist der Host</h2>
+      <button id="spin-button">🎲 Rad drehen</button>
+    </div>
+
+    <div id="result-display">Warte auf Verbindung...</div>
+  </div>
+
+  <script src="player.js"></script>
+</body>
+</html>
