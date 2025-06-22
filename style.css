@@ -186,25 +186,37 @@ input[type=number]::-webkit-outer-spin-button {
 
   #roulette-strip {
     width: 100%;
-    height: 60px;
+    height: 80px; /* etwas größer machen */
   }
 
   #strip-inner .slot {
-    width: 60px;
-    font-size: 18px;
+    width: 70px; /* größerer Slot */
+    font-size: 24px; /* besser lesbar */
   }
 
   input, select, button {
-    font-size: 14px;
-    padding: 10px;
+    font-size: 18px;
+    padding: 14px;
   }
 
   #result-display {
-    font-size: 16px;
-    padding: 10px;
+    font-size: 20px;
+    padding: 12px;
   }
 
   #bet-section, #host-section {
+    padding: 18px;
+  }
+
+  #status-bar {
+    font-size: 18px;
+  }
+
+  h2 {
+    font-size: 20px;
+  }
+}
+
     padding: 15px;
   }
 }
