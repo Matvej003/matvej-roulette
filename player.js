@@ -111,8 +111,13 @@ function animateRouletteStrip(winningColor, animationSeed) {
     }
   }
 
-  const slotWidth = 80;
-  const pointerPosition = 250;
+  // Dynamisch berechnete Werte (wichtig für Handy!)
+  const anySlot = document.querySelector('.slot');
+  const slotWidth = anySlot?.offsetWidth || 80;
+
+  const pointer = document.getElementById('strip-pointer');
+  const pointerPosition = pointer.offsetLeft + pointer.offsetWidth / 2;
+
   const targetIndex = matchingIndices[animationSeed % matchingIndices.length];
   const finalOffset = (targetIndex * slotWidth + slotWidth / 2) - pointerPosition;
 
@@ -122,7 +127,7 @@ function animateRouletteStrip(winningColor, animationSeed) {
 
   setTimeout(() => {
     const finalLeft = parseFloat(getComputedStyle(stripInner).left);
-    const centerIndex = Math.round((-finalLeft + pointerPosition) / slotWidth);
+    const centerIndex = Math.floor((-finalLeft + pointerPosition) / slotWidth);
     const slots = document.querySelectorAll('.slot');
     const centerSlot = slots[centerIndex];
 
@@ -137,6 +142,7 @@ function animateRouletteStrip(winningColor, animationSeed) {
     }
   }, 3100);
 }
+
 
 function evaluateBets(winningColor) {
   bets.forEach(bet => {
