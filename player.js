@@ -1,4 +1,3 @@
-// --- WebSocket-Verbindung aufbauen ---
 const socket = new WebSocket('wss://nosch.uber.space/web-rooms/');
 let clientId = null;
 let balance = 10000;
@@ -21,8 +20,6 @@ const spinBtn = document.getElementById('spin-button');
 const hostSection = document.getElementById('host-section');
 const resultDisplay = document.getElementById('result-display');
 
-
-// --- Bei Verbindungsaufbau dem Raum beitreten ---
 socket.addEventListener('open', () => {
   send('*enter-room*', 'roulette-room');
   resultDisplay.textContent = 'Verbunden! Warte auf Spieler-ID...';
@@ -32,13 +29,10 @@ function send(...msg) {
   socket.send(JSON.stringify(msg));
 }
 
-
-// --- Empfangene Nachrichten verarbeiten ---
 socket.addEventListener('message', (event) => {
   const incoming = JSON.parse(event.data);
   const type = incoming[0];
 
-// Je nach Nachrichtentyp verschiedene Aktionen
   switch (type) {
     case '*client-id*':
       clientId = incoming[1];
@@ -91,8 +85,22 @@ socket.addEventListener('message', (event) => {
     case 'new-round': {
       gameState = "waiting";
       hasBetThisRound = false;
-      if (balance > 0) placeBetBtn.disabled = false;
-      resultDisplay.textContent = `🌀 Neue Runde gestartet – setze deine Wette!`;
+
+      // Host sieht "Spin"-Button
+      if (isHost) {
+        spinBtn.disabled = false;
+        resultDisplay.textContent = `🎯 Du bist der Host! Warte auf Wetten...`;
+      } else {
+        resultDisplay.textContent = `🌀 Neue Runde gestartet – setze deine Wette!`;
+      }
+
+      // ALLE Spieler (auch Host) mit Guthaben können wieder wetten
+      if (balance > 0) {
+        placeBetBtn.disabled = false;
+        betColor.disabled = false;
+        betAmount.disabled = false;
+      }
+
       break;
     }
 
@@ -101,9 +109,12 @@ socket.addEventListener('message', (event) => {
   }
 });
 
-
-// --- Animation des Roulette-Streifens ---
 function animateRouletteStrip(winningColor, animationSeed) {
+  // Während der Animation: Wetten deaktivieren
+  placeBetBtn.disabled = true;
+  betColor.disabled = true;
+  betAmount.disabled = true;
+  
   const stripInner = document.getElementById('strip-inner');
   stripInner.style.transition = 'none';
   stripInner.style.left = '0px';
@@ -146,8 +157,6 @@ function animateRouletteStrip(winningColor, animationSeed) {
   }, 3100);
 }
 
-
-// --- Gewinn-/Verlustberechnung durch den Host ---
 function evaluateBets(winningColor) {
   bets.forEach(bet => {
     const won = bet.color === winningColor;
@@ -166,8 +175,21 @@ function evaluateBets(winningColor) {
 
     gameState = "waiting";
     hasBetThisRound = false;
-    if (balance > 0) placeBetBtn.disabled = false;
-    resultDisplay.textContent = `🌀 Neue Runde gestartet – setze deine Wette!`;
+
+    if (isHost) {
+      spinBtn.disabled = false;
+      resultDisplay.textContent = `🎯 Du bist der Host! Warte auf Wetten...`;
+    } else {
+      resultDisplay.textContent = `🌀 Neue Runde gestartet – setze deine Wette!`;
+    }
+    
+    // ALLE Spieler (auch Host) mit Guthaben können wieder wetten
+    if (balance > 0) {
+      placeBetBtn.disabled = false;
+      betColor.disabled = false;
+      betAmount.disabled = false;
+    }
+
   }, 4000);
 }
 
