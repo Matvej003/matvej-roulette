@@ -1,3 +1,4 @@
+// --- WebSocket-Verbindung aufbauen ---
 const socket = new WebSocket('wss://nosch.uber.space/web-rooms/');
 let clientId = null;
 let balance = 10000;
@@ -20,6 +21,8 @@ const spinBtn = document.getElementById('spin-button');
 const hostSection = document.getElementById('host-section');
 const resultDisplay = document.getElementById('result-display');
 
+
+// --- Bei Verbindungsaufbau dem Raum beitreten ---
 socket.addEventListener('open', () => {
   send('*enter-room*', 'roulette-room');
   resultDisplay.textContent = 'Verbunden! Warte auf Spieler-ID...';
@@ -29,10 +32,13 @@ function send(...msg) {
   socket.send(JSON.stringify(msg));
 }
 
+
+// --- Empfangene Nachrichten verarbeiten ---
 socket.addEventListener('message', (event) => {
   const incoming = JSON.parse(event.data);
   const type = incoming[0];
 
+// Je nach Nachrichtentyp verschiedene Aktionen
   switch (type) {
     case '*client-id*':
       clientId = incoming[1];
@@ -95,6 +101,8 @@ socket.addEventListener('message', (event) => {
   }
 });
 
+
+// --- Animation des Roulette-Streifens ---
 function animateRouletteStrip(winningColor, animationSeed) {
   const stripInner = document.getElementById('strip-inner');
   stripInner.style.transition = 'none';
@@ -138,6 +146,8 @@ function animateRouletteStrip(winningColor, animationSeed) {
   }, 3100);
 }
 
+
+// --- Gewinn-/Verlustberechnung durch den Host ---
 function evaluateBets(winningColor) {
   bets.forEach(bet => {
     const won = bet.color === winningColor;
