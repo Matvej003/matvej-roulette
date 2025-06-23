@@ -9,6 +9,7 @@ Die anderen Spieler wetten auf Rot oder Schwarz, nach dem die Wetten platziert w
 Nach dem drehen des Rads wird eine Gewinnerfarbe erwählt, bei gewonnener Wette erhält man den gewetteten Betrag doppelt zurück bei einer niederlage, verliert man den gewetteten Betrag.
 Wenn man 0 Credist hat, sind keine Wetten mehr möglich, der Wetten Button wird blockiert.
 Die Wetten sind blockiert werden eine Runde läuft und werden wieder frei gegeben, sobald eine neue Runde startet.
+Ein Fehler der auftreten kann ist, dass man nicht die Gewinner Nachricht erhält, sondern nur das Ergebnis, aber die Credits werden trotzdem angerechnet.
 
 Funktionsweise
 
