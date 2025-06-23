@@ -8,6 +8,7 @@ Dieser Spieler löst das Rad aus.
 Die anderen Spieler wetten auf Rot oder Schwarz, nach dem die Wetten platziert wurden, kann der Host das Rad drehen. 
 Nach dem drehen des Rads wird eine Gewinnerfarbe erwählt, bei gewonnener Wette erhält man den gewetteten Betrag doppelt zurück bei einer niederlage, verliert man den gewetteten Betrag.
 Wenn man 0 Credist hat, sind keine Wetten mehr möglich, der Wetten Button wird blockiert.
+Die Wetten sind blockiert werden eine Runde läuft und werden wieder frei gegeben, sobald eine neue Runde startet.
 
 Funktionsweise
 
