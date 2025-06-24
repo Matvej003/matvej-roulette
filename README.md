@@ -28,4 +28,4 @@ Nutzung
 5. Ergebnis wird visuell angezeigt – Gewinne/Verluste erscheinen sofort
 
 
- - Der Code wurde nicht komplett eigenhändig geschrieben. Die Hilfe von KI wurde verwendet. ChatGPT und ClaudeAI. -
+! Der Code wurde nicht komplett eigenhändig geschrieben. Die Hilfe von KI wurde verwendet. ChatGPT und ClaudeAI. !
